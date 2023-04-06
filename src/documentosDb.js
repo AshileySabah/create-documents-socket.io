@@ -10,4 +10,9 @@ function atualizarDocumento(nomeDocumento, texto){
     return documento
 }
 
-export { encontrarDocumento, atualizarDocumento }
+function obterDocumentos(){
+    const documentos = documentosColecao.find().toArray()
+    return documentos
+}
+
+export { encontrarDocumento, atualizarDocumento, obterDocumentos }
