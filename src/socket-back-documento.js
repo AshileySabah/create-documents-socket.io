@@ -8,9 +8,15 @@ io.on('connection', (socket) => {
     })
 
     socket.on('adicionar_documento', async (nomeDocumento) => {
-        const resultado = await cadastrarDocumento(nomeDocumento)
-        if(resultado.acknowledged){
-            io.emit('adicionar_documento_interface', nomeDocumento)
+        const existeDocumento = await encontrarDocumento(nomeDocumento) !== null
+
+        if(existeDocumento){
+            socket.emit('documento_existente', nomeDocumento)
+        }else{
+            const resultado = await cadastrarDocumento(nomeDocumento)
+            if(resultado.acknowledged){
+                io.emit('adicionar_documento_interface', nomeDocumento)
+            }
         }
     })
 
