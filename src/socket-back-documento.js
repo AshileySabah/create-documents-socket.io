@@ -21,7 +21,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on('deletar_documento', async (nomeDocumento) => {
-        const documento = await deletarDocumento(nomeDocumento)
+        const resultado = await deletarDocumento(nomeDocumento)
+        io.emit('tratar_deletar_documento_front', { sucesso: resultado.deletedCount, nomeDocumento})
     })
 
     socket.on('selecionar_documento', async (nomeDocumento, devolverTexto) => {

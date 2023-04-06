@@ -1,4 +1,4 @@
-import { atualizaTextoEditor } from "./documento.js";
+import { atualizaTextoEditor, tratarDeletarDocumento } from "./documento.js";
 
 const socket = io();
 
@@ -19,5 +19,10 @@ function emitirDeletarDocumento(nomeDocumento){
 socket.on('texto_editor_clientes', (texto) => {
     atualizaTextoEditor(texto)
 })
+
+socket.on('tratar_deletar_documento_front', (dados) => {
+    tratarDeletarDocumento(dados)
+})
+
 
 export { emitirTextoEditor, selecionarDocumento, emitirDeletarDocumento }

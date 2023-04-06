@@ -1,5 +1,5 @@
 const socket = io();
-import {inserirLinkDocumento} from './index.js'
+import { inserirLinkDocumento, removerLinkDocumento } from './index.js'
 
 socket.emit('obter_documentos', (documentos) => {
     documentos.forEach(documento => {
@@ -17,6 +17,10 @@ socket.on('adicionar_documento_interface', (nomeDocumento) => {
 
 socket.on('documento_existente', (nomeDocumento) => {
     alert(`O documento ${nomeDocumento} já existe`)
+})
+
+socket.on('tratar_deletar_documento_front', ({ sucesso, nomeDocumento }) => {
+    removerLinkDocumento(nomeDocumento)
 })
 
 export {emitirAdicionarDocumento}

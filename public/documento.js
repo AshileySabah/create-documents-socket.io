@@ -21,11 +21,21 @@ textoEditor.addEventListener('keyup', () => {
 
 botaoExcluir.addEventListener('click', () => {
   emitirDeletarDocumento(nomeDocumento)
-  window.location.href = 'index.html'
 })
 
 function atualizaTextoEditor(texto){
   textoEditor.value = texto
 }
 
-export { atualizaTextoEditor }
+function tratarDeletarDocumento({ sucesso, nomeDocumento: nome }){
+  if(sucesso){
+    if(nome === nomeDocumento){
+      alert(`O documento ${nome} foi deletado`)
+      window.location.href = '/'
+    }
+  }else{
+    alert(`Houve um erro ao deletar o documento ${nome}`)
+  }
+}
+
+export { atualizaTextoEditor, tratarDeletarDocumento }
