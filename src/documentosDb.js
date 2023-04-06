@@ -15,4 +15,12 @@ function obterDocumentos(){
     return documentos
 }
 
-export { encontrarDocumento, atualizarDocumento, obterDocumentos }
+function cadastrarDocumento(nomeDocumento){
+    const documento = documentosColecao.insertOne({
+        nome: nomeDocumento,
+        texto: ''
+    })
+    return documento
+}
+
+export { encontrarDocumento, atualizarDocumento, obterDocumentos, cadastrarDocumento }
