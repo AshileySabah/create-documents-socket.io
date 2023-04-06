@@ -12,8 +12,12 @@ function emitirTextoEditor(dados){
     socket.emit('texto_editor', dados)
 }
 
+function emitirDeletarDocumento(nomeDocumento){
+    socket.emit('deletar_documento', nomeDocumento)
+}
+
 socket.on('texto_editor_clientes', (texto) => {
     atualizaTextoEditor(texto)
 })
 
-export { emitirTextoEditor, selecionarDocumento }
+export { emitirTextoEditor, selecionarDocumento, emitirDeletarDocumento }

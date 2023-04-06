@@ -1,5 +1,5 @@
 import io from "./servidor.js";
-import { encontrarDocumento, atualizarDocumento, obterDocumentos,cadastrarDocumento} from "./documentosDb.js";
+import { encontrarDocumento, atualizarDocumento, obterDocumentos,cadastrarDocumento, deletarDocumento} from "./documentosDb.js";
 
 io.on('connection', (socket) => {
     socket.on('obter_documentos', async (devolverDocumentos) => {
@@ -18,6 +18,10 @@ io.on('connection', (socket) => {
                 io.emit('adicionar_documento_interface', nomeDocumento)
             }
         }
+    })
+
+    socket.on('deletar_documento', async (nomeDocumento) => {
+        const documento = await deletarDocumento(nomeDocumento)
     })
 
     socket.on('selecionar_documento', async (nomeDocumento, devolverTexto) => {

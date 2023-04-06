@@ -23,4 +23,9 @@ function cadastrarDocumento(nomeDocumento){
     return documento
 }
 
-export { encontrarDocumento, atualizarDocumento, obterDocumentos, cadastrarDocumento }
+function deletarDocumento(nomeDocumento){
+    const documento = documentosColecao.deleteOne({ nome: nomeDocumento })
+    return documento
+}
+
+export { encontrarDocumento, atualizarDocumento, obterDocumentos, cadastrarDocumento, deletarDocumento }
