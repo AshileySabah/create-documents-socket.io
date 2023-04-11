@@ -1,7 +1,7 @@
 import {
+  emitirExcluirDocumento,
   emitirTextoEditor,
   selecionarDocumento,
-  emitirDeletarDocumento,
 } from "./socket-front-documento.js";
 
 const parametros = new URLSearchParams(window.location.search);
@@ -9,10 +9,9 @@ const nomeDocumento = parametros.get("nome");
 
 const textoEditor = document.getElementById("editor-texto");
 const tituloDocumento = document.getElementById("titulo-documento");
-
-tituloDocumento.textContent = nomeDocumento || "Documento sem titulo";
-
 const botaoExcluir = document.getElementById("excluir-documento");
+
+tituloDocumento.textContent = nomeDocumento || "Documento sem título";
 
 selecionarDocumento(nomeDocumento);
 
@@ -23,23 +22,19 @@ textoEditor.addEventListener("keyup", () => {
   });
 });
 
-botaoExcluir.addEventListener("click", () => {
-  emitirDeletarDocumento(nomeDocumento);
-});
-
 function atualizaTextoEditor(texto) {
   textoEditor.value = texto;
 }
 
-function tratarDeletarDocumento({ sucesso, nomeDocumento: nome }) {
-  if (sucesso) {
-    if (nome === nomeDocumento) {
-      alert(`O documento ${nome} foi deletado`);
-      window.location.href = "/";
-    }
-  } else {
-    alert(`Houve um erro ao deletar o documento ${nome}`);
+botaoExcluir.addEventListener("click", () => {
+  emitirExcluirDocumento(nomeDocumento);
+});
+
+function alertarERedirecionar(nome) {
+  if (nome === nomeDocumento) {
+    alert(`Documento ${nome} excluído!`);
+    window.location.href = "/";
   }
 }
 
-export { atualizaTextoEditor, tratarDeletarDocumento };
+export { atualizaTextoEditor, alertarERedirecionar };
