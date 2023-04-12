@@ -10,24 +10,38 @@ function adicionarDocumento(nome) {
     nome,
     texto: "",
   });
+
   return resultado;
 }
 
 function encontrarDocumento(nome) {
-  const documento = documentosColecao.findOne({ nome });
+  const documento = documentosColecao.findOne({
+    nome,
+  });
+
   return documento;
 }
 
 function atualizaDocumento(nome, texto) {
   const atualizacao = documentosColecao.updateOne(
-    { nome },
-    { $set: { texto } }
+    {
+      nome,
+    },
+    {
+      $set: {
+        texto,
+      },
+    }
   );
+
   return atualizacao;
 }
 
 function excluirDocumento(nome) {
-  const resultado = documentosColecao.deleteOne({ nome });
+  const resultado = documentosColecao.deleteOne({
+    nome,
+  });
+
   return resultado;
 }
 
